@@ -1,0 +1,64 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Eire_Guess.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <!--<TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
+            <Image Height="90" HorizontalAlignment="Center" Margin="10,10,10,0" Name="settings" Stretch="Fill" VerticalAlignment="Top" Width="450" Source="Resources/Settings.png" />
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel Name="settingsPanel" Height="100" Width="450" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,100,0,0">
+                <TextBlock Height="60" Width="150" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Name: " Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Left" FontSize="48" FontWeight="Bold" />
+                <TextBox Name="nameBox" Height="110" Width="300" Margin="0,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Text="Paddy" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="42" Background="#C33BDB3B" BorderBrush="Black" BorderThickness="3" />
+            </StackPanel>
+            <StackPanel Name="soundPanel" Height="100" Width="450" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,200,0,0">
+                <TextBlock Height="60" Width="150" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Timer: " Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Left" FontSize="48" FontWeight="Bold" />
+                <Button Content="On" HorizontalAlignment="Center" Margin="53,10,10,10" Name="timerButton" VerticalAlignment="Bottom" Background="#C33BDB3B" Height="82" Width="200" FontSize="34" Click="timerButton_Click" BorderBrush="Black" Foreground="Black"/>
+            </StackPanel>
+            <Button Content="Save" HorizontalAlignment="Center" Margin="10,10,10,100" Name="saveButton" VerticalAlignment="Bottom" Background="#C33BDB3B" Height="82" Width="200" FontSize="34" BorderBrush="Black" Foreground="Black" Click="saveButton_Click" />
+            <!--<StackPanel Name="soundPanel" Height="100" Width="450" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,100,0,0">
+                <TextBlock Height="60" Width="150" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Sound: " Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Left" FontSize="48" FontWeight="Bold" />
+                <Button Content="On" Height="72" Name="soundButton" Width="160" Background="AliceBlue" Foreground="Black" Margin="70, 0, 0, 0" Click="soundButton_Click" />
+            </StackPanel>
+            <StackPanel Name="musicPanel" Height="100" Width="450" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,200,0,0">
+                <TextBlock Height="60" Width="150" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Music: " Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Left" FontSize="48" FontWeight="Bold" />
+                <Button Content="On" Height="72" Name="musicButton" Width="160" Background="AliceBlue" Foreground="Black" Margin="70, 0, 0, 0" Click="musicButton_Click" />
+            </StackPanel>-->
+        </Grid>
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>

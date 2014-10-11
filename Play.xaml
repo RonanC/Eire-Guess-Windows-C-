@@ -1,0 +1,177 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Eire_Guess.Play"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps">
+    
+    <phone:PhoneApplicationPage.Background>
+        <ImageBrush />
+    </phone:PhoneApplicationPage.Background>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="DarkTurquoise">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0, 0, 0 ,0">
+            <StackPanel Name="ScorePanel" Height="80" Width="450" VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Height="60" Width="200" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Score: " Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Left" FontSize="48" FontWeight="Bold" />
+                <TextBlock Name="ScoreBlock" Height="60" Width="200" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Top" Text="0" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Right" FontSize="48" FontWeight="Bold" />
+            </StackPanel>
+
+            <Image Height="620" Width="480" HorizontalAlignment="left" Margin="0,45,0,0" Name="eireImage" Stretch="Fill" VerticalAlignment="Top" Source="Resources/EireImageBorders.png" Opacity="1"/>
+            <StackPanel x:Name="gameOverPanel" Height="570" Width="480" HorizontalAlignment="left" VerticalAlignment="Top" Margin="0,100,0,0"  Opacity="0">
+                <TextBlock x:Name="finalScore" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Margin="10,10,10,10" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="48" FontWeight="Bold" Text="Score: " />
+            </StackPanel>
+
+            <Viewbox x:Name="CountyViewbox" HorizontalAlignment="Left" Height="729" Width="480" VerticalAlignment="Top" Margin="0, 45, 0, 0" Opacity="1">
+                <Canvas x:Name="CountyHotspot" Height="729" Width="560">
+                    <!--default height/width for above, aboveAbove and below is 100
+                    <Canvas x:Name="EireImage">
+                        <Image Height="729" Width="560" Source="/Resources/EireImageBorders.png" />
+                    </Canvas>-->
+                    <Canvas x:Name="Donegal" Tap="Guess_Tap" Tag="Donegal" Opacity="0">
+                        <Path Data="M248.66673,41.332485 C275.62881,28.929089 335.03943,20.820129 365.50165,17.332989 C378.5578,17.098457 378.86447,33.70993 368.66821,60.166958 C350.56564,83.262268 307.33722,123.20335 280.91721,141.49107 C271.36758,144.40318 299.86398,155.31503 291.33286,157.00287 C243.95732,176.66177 189.40717,163.06313 198.25072,137.49063 C208.70529,108.62414 230.53249,65.036377 248.66673,41.332485 z" Fill="#FFF4F4F5" Height="150.03" Canvas.Left="196.8" Stretch="Fill" Stroke="Black" Canvas.Top="16.832" UseLayoutRounding="False" Width="179.554"/>
+                    </Canvas>
+                    <Canvas x:Name="Derry" Tap="Guess_Tap" Tag="Derry" Opacity="0">
+                        <Path Data="M409.65515,35.899731 C419.70331,67.440536 428.20444,106.71771 429.66666,136.66667 C402.92682,120.43238 382.2811,106.38669 355,91.333336 C372.63779,83.208961 374.66296,69.871452 385.99985,52.667225 C391.49643,50.07822 403.43484,38.428059 409.65515,35.899731 z" Fill="#FFF4F4F5" Height="101.768" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="75.667" Canvas.Left="354.5" Canvas.Top="35.399"/>
+                    </Canvas>
+                    <Canvas x:Name="Antrim" Tap="Guess_Tap" Tag="Antrim" Opacity="0">
+                        <Path Data="M486.41379,37.116463 C504.67401,59.560371 524.09442,91.177483 529.33344,114.66673 C522.63428,128.1615 488.54877,143.67241 469.5,155.5 C448.80997,118.57005 437.41937,76.405533 431.58044,31.116034 C447.98221,23.222361 474.08148,27.762396 486.41379,37.116463 z" Fill="#FFF4F4F5" Height="129.431" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="98.752" Canvas.Left="431.081" Canvas.Top="26.569"/>
+                    </Canvas>
+                    <Canvas x:Name="Down" Tap="Guess_Tap" Tag="Down" Opacity="0">
+                        <Path Data="M471,186 C479.83542,179.33394 493.02054,168.71985 506.00296,160.15541 C532.74817,136.18845 556.95184,126.85442 553.6662,146.33354 C570.14752,158.14763 561.92108,174.73778 553,190 L500.00012,244 C475.0264,229.42384 459.97366,205.46814 469,186.5" Fill="#FFF4F4F5" Height="109.174" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="97.777" Canvas.Left="465.86" Canvas.Top="135.326"/>
+                    </Canvas>
+                    <Canvas x:Name="Armagh" Tap="Guess_Tap" Tag="Armagh" Opacity="0">
+                        <Path Data="M428.5,178.5 L448.5,181.5 L455.5,236.5 L431,244.5 L409,206.5 z" Fill="#FFF4F4F5" Height="67" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="47.5" Canvas.Left="408.5" Canvas.Top="178"/>
+                    </Canvas>
+                    <Canvas x:Name="Monaghan" Tap="Guess_Tap" Tag="Monaghan" Opacity="0">
+                        <Path Data="M384,201 L425,258.5 L416,271 L368,242 z" Fill="#FFF4F4F5" Height="71" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="58" Canvas.Left="367.5" Canvas.Top="200.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Cavan" Tap="Guess_Tap" Tag="Cavan" Opacity="0">
+                        <Path Data="M306.18079,230.36768 C322.71347,239.46045 393.14404,265.04623 397,274.5 L382,294.5 C358.15341,291.03372 338.44601,284.2265 328.24997,275.9231 C327.16473,266.93475 324.82031,259.96875 321.18195,252.36786 C311.93573,244.22395 282.33435,221.28949 306.18079,230.36768 z" Fill="#FFF4F4F5" Height="67.223" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="100.899" Canvas.Left="296.601" Canvas.Top="227.777"/>
+                    </Canvas>
+                    <Canvas x:Name="Fermanagh" Tap="Guess_Tap" Tag="Fermanagh" Opacity="0">
+                        <Path Data="M306,167.5 L314.5,170.5 L314,185 C323.46942,188.16847 328.92712,191.98181 330,196.5 L341,196 L357,209 C358.28815,220.48991 354.89816,229.09651 345.5,234 C319.51776,226.18214 296.52313,210.2128 276,187.5 C285.66565,178.88293 295.70441,172.4424 306,167.5 z" Fill="#FFF4F4F5" Height="67.5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Canvas.Left="275.5" Canvas.Top="167" Width="82.263"/>
+                    </Canvas>
+                    <Canvas x:Name="Tyrone" Tap="Guess_Tap" Tag="Tyrone" Opacity="0">
+                        <Path x:Name="___Path_" Data="M351,113 C378.40924,126.74355 402.142,139.97446 420.5,159.5 C418.3692,171.79259 408.64807,182.8008 396.5,191 C391.21063,189.36722 385.9863,187.52609 380.80594,185.48126 C376.05139,186.22121 369.625,195.88982 365.5,196 C357.35434,191.65691 341.37622,180.7271 330.99863,176.91574 C329.02966,173.44513 335.75418,167.52605 335.66132,162.24527 C328.65988,157.85049 321.62427,153.0981 314.5,148 z" Fill="#FFF4F4F5" Height="84" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="107" Canvas.Left="314" Canvas.Top="112.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Sligo" Tap="Guess_Tap" Tag="Sligo" Opacity="0">
+                        <Path Data="M166.726,224.55786 C180.55438,232.20261 195.71889,244.21841 190.66701,254.00034 C206.4144,252.29385 220.66296,254.49037 232.99907,261.66702 C245.88573,260.2702 250.75104,253.41032 245.99879,240.00023 L232.33253,183.66829 C214.43303,173.73143 189.1933,205.10945 167.00099,208.00075 z" Fill="#FFF4F4F5" Height="80.938" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="82.061" Canvas.Left="166.225" Canvas.Top="181.229"/>
+                    </Canvas>
+                    <Canvas x:Name="Leitrim" Tap="Guess_Tap" Tag="Leitrim" Opacity="0">
+                        <Path Data="M261,187 C269.6972,200.39626 279.28543,216.18022 279.00015,228.5 C302.27084,243.79233 311.43015,258.89496 319.63135,271.95648 L297.5,291 C284.83597,281.57175 277.03793,272.51141 276.5,264 L258.24075,253.06117 C269.40128,252.10455 266.69611,241.14215 254.74065,232.56117 C247.94963,227.68695 250.38443,220.43672 249,218 L248.5,186 z" Fill="#FFF4F4F5" Height="106" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Canvas.Left="248" Canvas.Top="185.5" Width="72.131"/>
+                    </Canvas>
+                    <Canvas x:Name="Roscommon" Tap="Guess_Tap" Tag="Roscommon" Opacity="0">
+                        <Path Data="M223.5,278 C223.5,278 215,306 215,306 C233.5984,311.06851 245.72346,322.61014 251,341 C258.07672,374.41235 265.70987,391.55875 274,389.5 C277.5285,383.48721 282.51419,378.31235 289,374 C279.42496,359.18741 272.47861,344.35797 270,329.5 C270.89893,316.81683 276.09094,305.45309 287.5,296 C275.69901,290.66223 266.09656,280.03998 257.5,267 C248.07007,279.73578 236.76981,283.56003 223.5,278 z" Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Height="123.666" Canvas.Left="214.5" Canvas.Top="266.5" Width="75"/>
+                    </Canvas>
+                    <Canvas x:Name="Galway" Tap="Guess_Tap" Tag="Galway" Opacity="0">
+                        <Path Data="M221.15451,319.70969 C228.5004,321.50092 267.80206,429.48734 272.15451,403.20969 C254.96396,414.71573 249.3707,425.61371 244,436.5 L192.5,430.5 L157.5,385 C117.57433,390.9574 83.180084,384.96857 58.5,358 C55.566761,345.01337 57.95763,338.66928 66.5,340 C99.482239,342.55331 130.05222,352.12195 160,363.5 C181.50026,327.50098 213.80862,317.91846 221.15451,319.70969 z" Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="215.849" Height="117.996" Canvas.Left="56.805" Canvas.Top="319.004"/>
+                    </Canvas>
+                    <Canvas x:Name="Mayo" Tap="Guess_Tap" Tag="Mayo" Opacity="0">
+                        <Path Data="M142.5,209 L171,266 L201,279.5 L197.5,312 L151.5,336 L86.926414,323.89246 L79.5,322.5 C73.876617,308.09415 74.337555,295.20938 79.5,283.5 C77.347107,268.95425 79.072701,255.11732 82,241.5 L56.5,234 C57.234371,219.04767 60.317123,205.53377 65,193 C90.030075,193.06889 115.59093,196.61649 142.5,209 z" Fill="#FFF4F4F5" Height="144" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="145.5" Canvas.Left="56" Canvas.Top="192.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Clare" Tap="Guess_Tap" Tag="Clare" Opacity="0">
+                        <Path Data="M165,420 C187.64522,440.47238 213.00986,448.46573 240,449 C226.26337,461.74985 218.851,475.91614 220,492 C197.52916,492.62308 175.40546,493.93362 153.56944,495.81384 C120.84995,505.22223 95.617722,507.28607 75,505 C91.433968,474.7023 109.71056,445.47559 131,418 z" Fill="#FFF4F4F5" Height="88.853" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="166" Canvas.Left="74.5" Canvas.Top="417.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Tipperary" Tap="Guess_Tap" Tag="Tipperary" Opacity="0">
+                        <Path Data="M303,457.5 L319.15237,501.444 C334.1636,514.03387 338.21512,530.97217 337,550 C323.32892,541.5929 303.49112,549.37115 278,579 C264.62448,552.88885 255.24332,539.2207 250.5,540 L264,527.5 C264.25867,510.0249 262.76987,496.3533 257,492 L238,490.5 L236.5,479.5 C252.25674,447.24637 263.82809,426.11798 269,422 C275.90054,422.75006 279.754,424.70752 281.5,427.5 C277.94391,437.88879 275.92926,448.12354 277.5,458 C272.59262,465.03705 274.93274,467.43976 282.5,466.5 C292.15652,468.01929 298.92767,464.91971 303,457.5 z" Fill="#FFF4F4F5" Height="158" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Canvas.Left="236" Canvas.Top="421.5" Width="101.702"/>
+                    </Canvas>
+                    <Canvas x:Name="Waterford" Tap="Guess_Tap" Tag="Waterford" Opacity="0">
+                        <Path Data="M274.5,591.5 L315,583 L312,566.5 L346.5,567.5 C359.38065,582.36053 372.96304,584.72656 387,579 C368.84244,602.14459 339.81647,616.95355 301,625.5 C291.78439,618.38196 282.93219,607.25665 274.5,591.5 z" Fill="#FFF4F4F5" Height="60" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Canvas.Left="274" Canvas.Top="566" Width="113.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Cork" Tap="Guess_Tap" Tag="Cork" Opacity="0">
+                        <Path Data="M154.5,575 C175.7962,571.23676 209.2271,571.80731 250,575 C254.88814,592.50122 267.22528,611.04852 286,630.5 L283.5,653.5 C223.18297,685.58484 160.7988,705.84015 97,718 L71.5,687.5 L146,641 C153.82193,619.87366 156.9856,597.93152 154.5,575 z" Fill="#FFF4F4F5" Height="146.613" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Canvas.Left="71" Canvas.Top="571.887" Width="215.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Kerry" Tap="Guess_Tap" Tag="Kerry" Opacity="0">
+                        <Path Data="M129,524 C131.80699,558.24347 136.15338,590.32428 141.5,621 L77,657.5 L20.5,644.5 L8,578 L82.5,532 z" Fill="#FFF4F4F5" Height="134.5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="134.5" Canvas.Left="7.5" Canvas.Top="523.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Limerick" Tap="Guess_Tap" Tag="Limerick" Opacity="0">
+                        <Path Data="M139.5,524 L225,500.5 L253.5,507.5 L254,523.5 L238.5,527.5 L235,543.5 L252.5,555.5 L252.5,564 C252.5,564 219.5,561 219.5,561 L208.5,548.5 L150.5,562 C139.82449,563.63666 135.63762,552.03156 139.5,524 z" Fill="#FFF4F4F5" Height="64.5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="116.912" Canvas.Left="137.588" Canvas.Top="500"/>
+                    </Canvas>
+                    <Canvas x:Name="Longford" Tap="Guess_Tap" Tag="Longford" Opacity="0">
+                        <Path Data="M318,290.5 C306.521,302.60843 295.93683,314.23022 286,325.5 L287.5,340.5 C296.40536,346.13754 303.69803,345.87955 310,342 C330.15024,309.83942 338.74557,300.81909 340,306.5 C335.86414,298.47388 328.40652,293.24521 318,290.5 z" Fill="#FFF4F4F5" Height="55.334" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="55" Canvas.Left="285.5" Canvas.Top="290"/>
+                    </Canvas>
+                    <Canvas x:Name="Westmeath" Tap="Guess_Tap" Tag="Westmeath" Opacity="0">
+                        <Path Data="M347.5,311.5 C357.47592,315.39792 368.36481,322.24396 380,331.5 C382.95877,340.20264 382.56042,348.28323 377.5,355.5 L337,376.5 L323,366 L302.5,369.5 C293.95422,364.66946 293.1601,359.64322 297,354.5 L323,350 C325.92035,339.76074 332.34622,327.78815 347.5,311.5 z" Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="88.057" Height="66" Canvas.Left="294.299" Canvas.Top="311"/>
+                    </Canvas>
+                    <Canvas x:Name="Meath" Tap="Guess_Tap" Tag="Meath" Opacity="0">
+                        <Path Data="M415,283 C427.30478,302.31439 444.02084,311.79446 464,314 L463.5,322.5 L441.5,335.5 L451.5,353 L446,364 C430.36615,358.85492 414.21442,356.29239 397.5,356 L392,357.5 L389.5,352 C396.98248,342.33688 399.84616,331.07776 396,317.5 C388.35892,315.05682 379.05008,313.56662 369,312.5 L371.5,301 C379.61609,306.43393 387.88,308.85062 396.5,304 L404.5,289.5 z" Fill="#FFF4F4F5" Height="82" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="96" Canvas.Left="368.5" Canvas.Top="282.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Louth" Tap="Guess_Tap" Tag="Louth" Opacity="0">
+                        <Path Data="M440.5,259 L477.5,252.5 L480,260.5 L481,279.66708 L473,301.5004 C466.88531,307.27344 448.8403,300.22946 430,278.5 z" Fill="#FFF4F4F5" Height="51.929" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="52" Canvas.Left="429.5" Canvas.Top="252"/>
+                    </Canvas>
+                    <Canvas x:Name="Dublin" Tap="Guess_Tap" Tag="Dublin" Opacity="0">
+                        <Path Data="M485,327 C478.89764,330.44522 471.30423,336.15976 461,346 C463.45776,348.96365 465.11789,352.31198 464,357 C457.85916,373.82983 452.23959,384.25085 447,390 C449.4931,394.89246 465.80978,396.73148 491.5,396.5 C497.06577,386.36163 498.24597,376.02127 495.5,365.5 C495.50647,354.3551 491.12592,341.09775 485,327 z" Fill="#FFF4F4F5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="50.921" Height="70.519" Canvas.Left="446.5" Canvas.Top="326.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Wicklow" Tap="Guess_Tap" Tag="Wicklow" Opacity="0">
+                        <Path Data="M447,406.5 C462.33255,413.11322 479.97531,415.15363 501,410.5 C505.39075,438.3053 505.39529,462.15189 494.5,482 L461.50018,471 C453.8833,474.78113 449.00235,479.36496 446,484.5 C438.33331,486.83331 436.00003,485.1666 439,479.5 C445.45468,476.29993 448.84619,470.51566 449.00012,462 C449.00012,462 427,447.5 427,447.5 L425.5,432.5 C434.47388,428.55707 442.13068,421.17148 447,406.5 z" Fill="#FFF4F4F5" Height="80.021" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="79.249" Canvas.Left="425" Canvas.Top="406"/>
+                    </Canvas>
+                    <Canvas x:Name="Wexford" Tap="Guess_Tap" Tag="Wexford" Opacity="0">
+                        <Path Data="M465,481.5 C455.04803,495.87576 440.09311,504.66171 422.5,510.5 L400,561 C406.2699,573.17175 412.9556,584.67621 421,594 C441.70145,593.64508 462.26517,591.13977 482.5,583.5 C482.5,583.5 492,495 492,495 z" Fill="#FFF4F4F5" Height="113.5" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="93" Canvas.Left="399.5" Canvas.Top="481"/>
+                    </Canvas>
+                    <Canvas x:Name="Kilkenny" Tap="Guess_Tap" Tag="Kilkenny" Opacity="0">
+                        <Path Data="M332.5,484 C352.71332,480.69232 369,469.5 378,473 C374.4736,474.73508 374.15259,483.52258 386,500.50003 C389.66748,508.74561 390.6463,521.93213 396,533.5 L386,569.5 L372,568.5 C360.91983,560.24042 354.4671,546.79358 351,530 z" Fill="#FFF4F4F5" Height="98.17" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="64.5" Canvas.Left="332" Canvas.Top="471.83"/>
+                    </Canvas>
+                    <Canvas x:Name="Laois" Tap="Guess_Tap" Tag="Laois" Opacity="0">
+                        <Path Data="M329,414 C329,414 375,417.5 375,417.5 C375.28552,432.72913 381.1636,449.23938 392.5,467 L384.5,468.5 L379,460 C350.6922,465.69153 331.17908,468.77582 323,468.5 L319,444.5 C327.79712,431.67526 331.07507,421.53555 329,414 z" Fill="#FFF4F4F5" Height="55.517" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="74.5" Canvas.Left="318.5" Canvas.Top="413.5"/>
+                    </Canvas>
+                    <Canvas x:Name="Offaly" Tap="Guess_Tap" Tag="Offaly" Opacity="0">
+                        <Path Data="M293.5,383 C319.06638,387.68839 344.38708,385.15088 369.5,376.5 C376.80957,379.83868 379.2045,389.69931 377.5,405 C357.18344,402.48083 336.85031,403.60599 316.5,408.5 C315.4614,426.40207 312.03232,437.11407 306.5,441.5 L290,441.5 C294.17172,430.26978 291.74951,419.90439 282,410.5 C288.94543,406.30438 293.29187,397.95731 293.5,383 z" Fill="#FFF4F4F5" Height="66" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="97.024" Canvas.Left="281.5" Canvas.Top="376"/>
+                    </Canvas>
+                    <Canvas x:Name="Kildare" Tap="Guess_Tap" Tag="Kildare" Opacity="0">
+                        <Path Data="M394,374.5 C410.61057,375.6174 424.05371,377.97296 434.5,381.5 L437,399 C429.56943,411.06122 421.70398,418.91748 413.5,423.5 L408,441.5 L411,452 L403,454.5 L390,436.5 C388.74158,421.18069 391.55157,399.39041 394,374.5 z" Fill="#FFF4F4F5" Height="81" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="48.311" Canvas.Left="389.189" Canvas.Top="374"/>
+                    </Canvas>
+                    <Canvas x:Name="Carlow" Tap="Guess_Tap" Tag="Carlow" Opacity="0">
+                        <Path Data="M403.5,525 C396.25488,508.66522 392.0592,494.76419 390,483.5 C394.90085,474.13187 405.92307,466.84222 421.5,462 C421.5,462 438,464.5 438,464.5 L436.5,469 L421,471 C419.81415,467.05078 421.23468,471.67816 424.5,492 C419.87653,504.3725 412.72174,515.28107 403.5,525 z" Fill="#FFF4F4F5" Height="64" Stretch="Fill" Stroke="Black" UseLayoutRounding="False" Width="49" Canvas.Left="389.5" Canvas.Top="461.5"/>
+                    </Canvas>
+                </Canvas>
+            </Viewbox>
+
+
+            <Image HorizontalAlignment="Center" Height="729" Width="490" VerticalAlignment="Top" Margin="0, 45, 0, 0" x:Name="transImage" Source="Resources/Trans.png" Opacity="0" Stretch="Fill" Visibility="Collapsed" />
+
+
+            <!--<Button Content="OK" HorizontalAlignment="Center" Margin="0,350,0,0" Name="okButton" VerticalAlignment="Center" Height="82" Width="200" FontSize="34" Background="#C33BDB3B" Click="okButton_Click" Visibility="Collapsed" />-->
+
+
+            <StackPanel Name="TimerPanel" Height="70" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,90">
+                <TextBlock Name="TimerBlock" Height="70" Width="450" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="5" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="48" FontWeight="Bold" />
+             </StackPanel>
+            <!--<StackPanel Name="TestPanel" Height="90" VerticalAlignment="Bottom" Background="Yellow" HorizontalAlignment="Center" Width="480" Margin="0,0,0,80">
+                <TextBlock Name="TestBlock" Height="20" Width="450" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="test" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="15"/>
+                <TextBlock Name="TestBlock" Height="70" Width="450" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="test" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="20" FontWeight="Bold" TextWrapping="Wrap"/>
+            </StackPanel>-->
+            <StackPanel Name="QuestionPanel" Height="90" VerticalAlignment="Bottom" Background="Yellow" HorizontalAlignment="Center" Width="480">
+                <!--<TextBlock Name="TestBlock" Height="20" Width="450" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="test" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="15"/>-->
+                <TextBlock Name="QuestionBlock" Height="70" Width="450" Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Question" Foreground="Black" FontFamily="Comic Sans MS" TextAlignment="Center" FontSize="48" FontWeight="Bold" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</phone:PhoneApplicationPage>

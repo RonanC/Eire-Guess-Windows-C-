@@ -1,0 +1,53 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Eire_Guess.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Gray">
+        <!--"Transparent"-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <!--<TextBlock x:Name="ApplicationTitle" Text="Eire Guess" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Home" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
+            <Image Height="90" HorizontalAlignment="Center" Margin="10,10,10,0" Name="eireGuess" Stretch="Fill" VerticalAlignment="Top" Width="450" Source="Resources/EireGuess.png" />
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Image Height="455" HorizontalAlignment="Center" Margin="10,0,10,10" Name="eireImage" Stretch="Fill" VerticalAlignment="Top" Width="364" Source="Resources/EireImage.png" />
+            <Button Content="Play" HorizontalAlignment="Left" Margin="10,10,10,10" Name="playButton" VerticalAlignment="Bottom" Background="#C33BDB3B" Click="playButton_Click" Height="82" Width="200" FontSize="34"/>
+            <Button Content="Scores" HorizontalAlignment="Right" Margin="10,10,10,10" Name="ScoresButton" VerticalAlignment="Bottom"  Background="#C33BDB3B" Click="ScoresButton_Click" Height="82" Width="200" FontSize="34"/>
+            <!--<Image Height="80" Width="80" HorizontalAlignment="Left" Margin="2,10,10,2" Name="goldPot" Stretch="Fill" VerticalAlignment="Bottom" Source="Resources/GoldPotIcon.png" Tap="goldPot_Tap" />-->
+            <!--<Image Height="80" Width="80" HorizontalAlignment="Right" Margin="10,10,2,2" Name="cog" Stretch="Fill" VerticalAlignment="Bottom" Source="Resources/Cog.png" Tap="cog_Tap" />-->
+        </Grid>
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>-->
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Settings" x:Name="settingsIcon" Click="settingsIcon_Click" />
+                <shell:ApplicationBarMenuItem Text="About" x:Name="aboutIcon" Click="aboutIcon_Click" />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
