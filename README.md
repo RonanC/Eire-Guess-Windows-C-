@@ -6,10 +6,10 @@ Overview
 GMIT - Mobile Apps (Win8/C#) - Lecturer: Damien Costello  
 Eire Guess - November 2013 (Semester 3)
 
-Showcasing:
-*Image mapping
-*Timer, scoreboard
-*Saving/loading states/data​
+Showcasing:  
+*Image mapping  
+*Timer, scoreboard  
+*Saving/loading states/data  
 
 
 About
