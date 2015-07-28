@@ -14,6 +14,8 @@ Once you start the game you are presented with an image of Ireland, a county nam
 
 You get one point for each correct answer, each county comes up once randomely, once the game is over your name is saved on the scoreboard. You can edit your name in the settings, you can also turn the timer off. 
 
+This application was submitted into the GMIT Hackathon competition and won.
+
 Tools used
 ---------
 
