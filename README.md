@@ -19,7 +19,7 @@ Tools used
 
 I used C#, XAML in Visual Studio, and Microsoft Blend (Image Mapping) and other utilities such as GIMP (image editing) in order to create the app.
 
-Download on your mobile
+Extras
 ---------
 
 Windows Phone:
